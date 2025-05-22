@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacobo Betancourt - Estrategia Web Inteligente con IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base font for the entire body */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Asegura que el texto sea visible durante la carga de la fuente */
+            font-display: swap;
+        }
+        /* Custom color palette inspired by the new reference image (orange, dark grey, white) */
+        /* Main accent color: Vibrant Orange */
+        .bg-brand-primary { background-color: #FF9900; } /* Orange */
+        .text-brand-primary { color: #FF9900; }
+        .border-brand-primary { border-color: #FF9900; }
+
+        /* Secondary background color: Light Grey (for alternating sections) */
+        .bg-brand-secondary { background-color: #F8F8F8; } /* Very light grey, almost white */
+        /* Dark text/background color from reference image - now softer charcoal grey */
+        .text-brand-dark { color: #333333; } /* Softer charcoal grey */
+        /* Muted text color, keeping it a soft gray */
+        .text-brand-muted { color: #6b7280; }
+
+        /* Hero section background image with overlay for readability */
+        .hero-bg-image {
+            /* Usando placehold.it para mayor compatibilidad */
+            background-image: url('https://i.postimg.cc/qqMzcSDd/assets-task-01jvq79w3dfj5t23jhcex78cv9-1747757452-img-3.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto parallax para un toque moderno */
+        }
+        /* Consistent padding for sections, responsive */
+        .section-padding {
+            padding-top: 4rem; /* 64px */
+            padding-bottom: 4rem; /* 64px */
+        }
+        @media (min-width: 768px) {
+            .section-padding {
+                padding-top: 6rem; /* 96px */
+                padding-bottom: 6rem; /* 96px */
+            }
+        }
+        /* CTA button styling with hover effects */
+        .cta-button {
+            padding: 0.75rem 1.5rem; /* 12px 24px */
+            border-radius: 0.5rem; /* 8px */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        .cta-button-primary {
+            background-color: #FF9900; /* Orange */
+            color: white;
+        }
+         .cta-button-primary:hover {
+            background-color: #CC7A00; /* Darker shade on hover */
+        }
+
+        /* WhatsApp button specific styling */
+        .cta-button-whatsapp {
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+        }
+        .cta-button-whatsapp:hover {
+            background-color: #1DA851; /* Darker WhatsApp Green on hover */
+        }
+
+        /* Card styling with subtle hover effect */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem; /* 32px */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15), 0 6px 8px -3px rgba(0, 0, 0, 0.08);
+        }
+        /* Icon placeholder styling - now circular, similar to the new reference */
+        .icon-placeholder {
+            width: 3.5rem; /* 56px, slightly larger */
+            height: 3.5rem; /* 56px */
+            border-radius: 50%; /* Circular */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem; /* 16px */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* FAQ accordion styling for smooth transition */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        .faq-answer.active {
+            max-height: 500px; /* Increased max-height for more content flexibility */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .faq-question svg {
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active svg {
+            transform: rotate(180deg);
+        }
+
+        /* Keyframes for fade-in-up animation */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Apply animation to elements with animate-fade-in-up class */
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        /* Apply delays for staggered animation */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="bg-white text-brand-dark">
+
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-brand-primary">Jacobo Betancourt</a>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <nav class="space-x-4"> <a href="#beneficios" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">Beneficios</a>
+                    <a href="#proceso" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">Proceso</a>
+                    <a href="#ia" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">IA en Acción</a>
+                    <a href="#servicios" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">Servicios</a>
+                    <a href="#casos-exito" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">Casos de Éxito</a>
+                    <a href="#sobre-mi" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">Sobre Mí</a>
+                    <a href="#faq" class="text-brand-muted hover:text-brand-primary transition-colors duration-200 font-bold">FAQ</a>
+                </nav>
+                <a href="https://api.whatsapp.com/send/?phone=%2B573247223160&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="cta-button cta-button-whatsapp text-lg">
+                    Contactar por WhatsApp
+                </a>
+            </div>
+
+            <button id="mobileMenuButton" class="md:hidden text-brand-dark focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg flex flex-col items-center">
+            <a href="#beneficios" class="block px-6 py-3 text-brand-muted hover:bg-brand-secondary hover:text-brand-primary transition-colors duration-200 font-bold text-center">Beneficios</a>
+            <a href="#proceso" class="block px-6 py-3 text-brand-muted hover:bg-brand-secondary hover:text-brand-primary transition-colors duration-200 font-bold text-center">IA en Acción</a>
+            <a href="#servicios" class="block px-6 py-3 text-brand-muted hover:bg-brand-secondary hover:text-brand-primary transition-colors duration-200 font-bold text-center">Servicios</a>
+            <a href="#casos-exito" class="block px-6 py-3 text-brand-muted hover:bg-brand-secondary hover:text-brand-primary transition-colors duration-200 font-bold text-center">Casos de Éxito</a>
+            <a href="#sobre-mi" class="block px-6 py-3 text-brand-muted hover:bg-brand-secondary hover:text-brand-primary transition-colors duration-200 font-bold text-center">Sobre Mí</a>
+            <a href="https://api.whatsapp.com/send/?phone=%2B573247223160&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="block px-6 py-4 text-center cta-button cta-button-whatsapp mx-4 my-2 text-lg">
+                Contactar por WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <section class="hero-bg-image text-white section-padding flex items-center justify-center min-h-screen">
+        <div class="bg-black bg-opacity-60 p-8 md:p-12 rounded-none text-center w-full h-full flex flex-col justify-center items-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight animate-fade-in-up delay-100">
+                ¿Tu Estrategia Digital No Está Cumpliendo tus Objetivos de Negocio? <br><span class="text-brand-primary">¡Te Ayudo a Superarlos con IA!</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 animate-fade-in-up delay-300">
+                Creo tu presencia digital desde cero, usando la Inteligencia Artificial para que tu negocio destaque. Elijo herramientas prácticas y económicas para que logres grandes resultados sin gastar de más cada mes.
+            </p>
+            <a href="https://api.whatsapp.com/send/?phone=%2B573247223160&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="cta-button cta-button-whatsapp text-lg md:text-xl inline-block animate-fade-in-up delay-500">
+                Potenciar Mi Presencia por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-6">
+
+        <section id="beneficios" class="section-padding">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">Resultados y Eficiencia para <span class="text-brand-primary">tu Crecimiento</span></h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-brand-primary text-white mx-auto">
+                        <i class="fas fa-chart-line text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Posicionamiento Estratégico</h3>
+                    <p class="text-brand-muted">Con IA, tu contenido y web se optimizan para que te encuentren fácil en Google y otros buscadores.</p>
+                </div>
+                <div class="card text-center">
+                     <div class="icon-placeholder bg-gray-700 text-white mx-auto"> <i class="fas fa-dollar-sign text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Máxima Eficiencia, Mínimos Gastos</h3>
+                    <p class="text-brand-muted">Elijo las herramientas web más prácticas y baratas, pero muy potentes, para que tu negocio funcione sin problemas.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-brand-primary text-white mx-auto">
+                       <i class="fas fa-piggy-bank text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Ahorro Inteligente a Largo Plazo</h3>
+                    <p class="text-brand-muted">Te ayudo a elegir soluciones web que no te cuesten un ojo de la cara cada mes, pensando en tu bolsillo a largo plazo.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-gray-700 text-white mx-auto"> <i class="fas fa-clock text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Tu Web Trabajando para Ti 24/7</h3>
+                    <p class="text-brand-muted">Tu web siempre activa, trabajando para ti día y noche, atrayendo clientes incluso cuando descansas.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-brand-primary text-white mx-auto">
+                        <i class="fas fa-check-circle text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Diseño Profesional y Funcional</h3>
+                    <p class="text-brand-muted">Diseño una web que no solo se ve genial, sino que también convierte a tus visitantes en clientes de verdad.</p>
+                </div>
+                 <div class="card text-center">
+                    <div class="icon-placeholder bg-gray-700 text-white mx-auto"> <i class="fas fa-lightbulb text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Innovación Constante</h3>
+                    <p class="text-brand-muted">Siempre al día con lo último en tecnología para que tu negocio siempre esté un paso adelante.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proceso" class="section-padding bg-brand-secondary rounded-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">Mi Enfoque: <span class="text-brand-primary">Simple y Estratégico</span></h2>
+            <div class="max-w-3xl mx-auto space-y-10">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl shadow-md">1</div>
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-xl font-semibold mb-1 text-brand-dark">Entiendo tus Metas</h3>
+                        <p class="text-brand-muted">Hablo contigo para entender qué quieres lograr y a quién le vendes, así creo un plan web hecho a tu medida.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-md">2</div>
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-xl font-semibold mb-1 text-brand-dark">Estrategia Potenciada por IA</h3>
+                        <p class="text-brand-muted">Uso la IA para crear un plan web que haga que tu contenido y tu página sean súper visibles y relevantes en internet.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl shadow-md">3</div>
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-xl font-semibold mb-1 text-brand-dark">Creación Eficiente y Robusta</h3>
+                        <p class="text-brand-muted">Monto tu presencia online con herramientas gratis o muy baratas, pero que funcionan de maravilla y crecen contigo.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-md">4</div>
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-xl font-semibold mb-1 text-brand-dark">Entrega, Capacitación y Crecimiento</h3>
+                        <p class="text-brand-muted">Te entrego tu web lista, te enseño a usarla para que tengas el control, y te ayudo a seguir creciendo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ia" class="section-padding">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://i.postimg.cc/7Lj6cXHp/IA-Optimizando-Results.png" alt="[Image of IA Optimizando Resultados]" class="rounded-lg shadow-xl w-full object-cover h-64 md:h-auto" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/600x400/CCCCCC/000000?text=Error+Cargando+Imagen';">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center md:text-left text-brand-dark">La <span class="text-brand-primary">Inteligencia Artificial</span> en Acción</h2>
+                    <p class="text-brand-muted mb-6 text-center md:text-left">Así es como la Inteligencia Artificial hace magia por tu negocio en internet, de forma práctica y efectiva:</p>
+                    <ul class="space-y-3 text-brand-muted">
+                        <li class="flex items-start text-left">
+                            <i class="fas fa-robot w-5 h-5 text-brand-primary mr-2 mt-1 flex-shrink-0"></i> Mejoro tu contenido para que le encante a tus clientes y a Google, llegando a más gente sin pagar publicidad.
+                        </li>
+                        <li class="flex items-start text-left">
+                            <i class="fas fa-search w-5 h-5 text-gray-700 mr-2 mt-1 flex-shrink-0"></i> Encuentro las palabras clave perfectas y las tendencias de tu mercado para que siempre estés un paso adelante de la competencia.
+                        </li>
+                        <li class="flex items-start text-left">
+                            <i class="fas fa-sitemap w-5 h-5 text-brand-primary mr-2 mt-1 flex-shrink-0"></i> Organizo tu web para que sea fácil de usar y de encontrar, tanto para tus clientes como para los buscadores.
+                        </li>
+                        <li class="flex items-start text-left">
+                            <i class="fas fa-bullhorn w-5 h-5 text-gray-700 mr-2 mt-1 flex-shrink-0"></i> Me aseguro de que tu mensaje sea claro y convenza, para que los visitantes de tu web se conviertan en clientes.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-brand-secondary rounded-lg">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold bold mb-6 text-brand-dark">Herramientas <span class="text-brand-primary">Eficientes y Económicas</span></h2>
+                <p class="text-lg text-brand-muted leading-relaxed">
+                    Construyo tu presencia web con herramientas que te ahorran dinero a largo plazo. Busco las mejores plataformas, muchas de ellas gratis o con planes muy baratos, para que tu negocio crezca sin que te cueste un dineral cada mes. ¡Tu éxito y tu bolsillo son mi prioridad!
+                </p>
+            </div>
+        </section>
+
+        <section id="servicios" class="section-padding">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">Mis <span class="text-brand-primary">Servicios y Productos</span></h2>
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-brand-primary text-white mx-auto">
+                        <i class="fas fa-rocket text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Landing Pages que Venden ¡Rápido!</h3>
+                    <img src="https://i.postimg.cc/MGwtRkjG/h.jpg" alt="[Image of Landing Pages]" class="w-full h-48 object-cover mb-4 rounded-b-lg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/600x400/FF9900/FFFFFF?text=Landing+Pages';">
+                    <p class="text-brand-muted">
+                        Convierte visitantes en clientes con páginas de aterrizaje diseñadas para vender. Usando la IA, creo tu landing perfecta en tiempo récord, optimizada para tus campañas y objetivos específicos.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-gray-700 text-white mx-auto">
+                        <i class="fas fa-laptop-code text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Tu Web: Sencilla, Clara y Profesional</h3>
+                    <img src="https://i.postimg.cc/g28Nncj5/f.jpg" alt="[Image of Tu Web]" class="w-full h-48 object-cover mb-4 rounded-b-lg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/600x400/333333/FF9900?text=Tu+Web';">
+                    <p class="text-brand-muted">
+                        Obtén una presencia online completa y elegante en una sola página. Ideal para presentar tu negocio, servicios o portafolio de forma clara, moderna y fácil de navegar.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-brand-primary text-white mx-auto">
+                        <i class="fas fa-share-alt text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Redes Sociales que Conectan y Venden</h3>
+                    <img src="https://i.postimg.cc/W478w9Mw/d.jpg" alt="[Image of Redes Sociales]" class="w-full h-48 object-cover mb-4 rounded-b-lg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/600x400/FF9900/FFFFFF?text=Redes+Sociales';">
+                    <p class="text-brand-muted">
+                        Maximiza tu impacto en redes sociales. Optimizo tus perfiles, creando contenido atractivo, gestiono tu presencia para conectar con tu audiencia, generar leads y aumentar tus ventas.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-gray-700 text-white mx-auto">
+                        <i class="fas fa-video text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Videos Cortos que Cautivan ¡Listos para Compartir!</h3>
+                    <img src="https://i.postimg.cc/pTXZGDCb/e.jpg" alt="[Image of Videos Cortos]" class="w-full h-48 object-cover mb-4 rounded-b-lg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/600x400/333333/FF9900?text=Videos+Cortos';">
+                    <p class="text-brand-muted">
+                        Atrae la atención y comunica tu mensaje de forma dinámica con videos cortos profesionales para redes sociales y web. La IA me ayuda a crear contenido atractivo y optimizado para cada plataforma.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <div class="icon-placeholder bg-brand-primary text-white mx-auto">
+                        <i class="fas fa-image text-2xl"></i> </div>
+                    <h3 class="text-xl font-semibold mb-3 text-brand-dark">Imágenes que Venden a Primera Vista</h3>
+                    <img src="https://i.postimg.cc/8zcTS3Cj/w.jpg" alt="[Image of Imagenes]" class="w-full h-48 object-cover mb-4 rounded-b-lg" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/600x400/FF9900/FFFFFF?text=Imagenes';">
+                    <p class="text-brand-muted">
+                        Crea una impresión duradera con imágenes profesionales y atractivas para tu sitio web y redes sociales. Diseños optimizados para captar la atención, reforzar tu marca y convertir a los espectadores en clientes.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="casos-exito" class="section-padding">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">Proyectos que <span class="text-brand-primary">Inspiran</span></h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card overflow-hidden">
+                    <img src="https://placehold.it/600x400/FF9900/FFFFFF?text=Negocio+Exitoso+Online" alt="Caso de éxito de negocio online" class="w-full h-48 object-cover mb-4 rounded-t-lg" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2 text-brand-dark">Cliente Alfa: ¡Más Vistos en Internet!</h3>
+                        <p class="text-brand-muted text-sm">"Gracias al enfoque con IA y herramientas eficientes de Jacobo, nuestra visibilidad online mejoró notablemente sin disparar los costos. ¡Estamos muy satisfechos con los resultados!"</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <img src="https://placehold.it/600x400/333333/FF9900?text=E-commerce+Rentable" alt="Caso de éxito de e-commerce" class="w-full h-48 object-cover mb-4 rounded-t-lg" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2 text-brand-dark">Emprendimiento Beta: ¡Más Clientes Rápidamente!</h3>
+                        <p class="text-brand-muted text-sm">"El nuevo sitio es profesional y carga rapidísimo. La optimización IA se nota en el aumento de las consultas y ventas que recibimos. Un cambio radical."</p>
+                    </div>
+                </div>
+                <div class="card overflow-hidden">
+                    <img src="https://placehold.it/600x400/FF9900/FFFFFF?text=Marca+Digital+Fuerte" alt="Caso de éxito de marca digital" class="w-full h-48 object-cover mb-4 rounded-t-lg" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2 text-brand-dark">PYME Gamma: ¡Grandes Resultados con Poco Dinero!</h3>
+                        <p class="text-brand-muted text-sm">"Logramos una presencia digital de primer nivel con un presupuesto ajustado. La atención al detalle y el conocimiento de Jacobo son totalmente recomendados."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-brand-secondary rounded-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">Lo que Dicen <span class="text-brand-primary">Mis Clientes</span></h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="card text-center p-8">
+                    <p class="text-lg text-brand-muted italic mb-4">"Jacobo entendió justo lo que necesitaba y aplicó soluciones inteligentes que funcionaron de verdad. ¡Mi negocio despegó en internet como nunca lo imaginé!"</p>
+                    <p class="font-semibold text-brand-dark">- Ana Sofía, Dueña de Boutique Online</p>
+                </div>
+                <div class="card text-center p-8">
+                    <p class="text-lg text-brand-muted italic mb-4">"Quería resultados y eficiencia sin gastar mucho en mi primera web. Jacobo me dio justo eso. Muy profesional y con un enfoque de IA súper acertado. ¡Lo recomiendo a ojos cerrados!"</p>
+                    <p class="font-semibold text-brand-dark">- Carlos Gómez, Consultor Independiente</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="section-padding">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div class="md:w-1/3 flex-shrink-0">
+                    <img src="https://i.postimg.cc/qR2ns4N5/465719438-8566050690168476-5798572598584308189-n-fotor-20250520114447.png" alt="Foto de Jacobo Betancourt" class="rounded-full shadow-xl w-64 h-64 md:w-full md:h-auto object-cover mx-auto border-4 border-brand-primary" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.it/400x400/CCCCCC/000000?text=Error+Cargando+Imagen';">
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center md:text-left text-brand-dark">Conoce a <span class="text-brand-primary">Jacobo Betancourt</span></h2>
+                    <p class="text-lg text-brand-muted mb-4 leading-relaxed text-center md:text-left">
+                        ¡Hola! Soy Jacobo Betancourt, y mi pasión es empoderar a emprendedores y PYMES como tú para que no solo existan, sino que brillen en el vasto mundo digital. Con **más de 8 años** ayudando a negocios a crecer en internet, he visto cómo usar la tecnología de forma inteligente puede hacer que tu negocio despegue.
+                    </p>
+                    <p class="text-lg text-brand-muted leading-relaxed text-center md:text-left">
+                        Mi secreto es combinar estrategias que te posicionen bien, el poder de la Inteligencia Artificial y herramientas que no te cuesten un dineral. Así, tu web no solo se verá genial y funcionará perfecto, sino que será rentable para tu bolsillo a largo plazo. ¡Una presencia online fuerte no tiene por qué ser cara! Hablemos de cómo puedo ayudarte a cumplir tus metas y llevar tu negocio al siguiente nivel.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-padding bg-brand-secondary rounded-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">Preguntas <span class="text-brand-primary">Frecuentes</span></h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div>
+                    <button class="faq-question w-full text-left text-lg font-semibold text-brand-dark p-4 bg-white rounded-md shadow hover:bg-gray-50 focus:outline-none transition flex justify-between items-center">
+                        ¿Cómo mejora la IA mi sitio web y mi posicionamiento?
+                        <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-answer p-4 bg-white border-t border-gray-200 text-brand-muted">
+                        La IA me ayuda a entender qué busca la gente y a organizar tu web para que Google la encuentre fácil. Así, tu contenido mejora, tus clientes navegan mejor y tu negocio aparece más arriba en los buscadores, ¡atrayendo más gente interesada!
+                    </div>
+                </div>
+                <div>
+                    <button class="faq-question w-full text-left text-lg font-semibold text-brand-dark p-4 bg-white rounded-md shadow hover:bg-gray-50 focus:outline-none transition flex justify-between items-center">
+                        ¿Por qué me enfoco en herramientas económicas o gratuitas?
+                        <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-answer p-4 bg-white border-t border-gray-200 text-brand-muted">
+                        Quiero que crezcas sin que te cueste un ojo de la cara cada mes. Por eso, elijo herramientas muy buenas que son gratis o muy baratas. Así, tienes una base digital fuerte y puedes crecer sin preocuparte por los gastos, ¡liberando dinero para otras cosas importantes de tu negocio!
+                    </div>
+                </div>
+                <div>
+                    <button class="faq-question w-full text-left text-lg font-semibold text-brand-dark p-4 bg-white rounded-md shadow hover:bg-gray-50 focus:outline-none transition flex justify-between items-center">
+                        ¿Qué tipo de soporte ofrezco después de entregar la web?
+                        <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-answer p-4 bg-white border-t border-gray-200 text-brand-muted">
+                        Después de entregarte tu web, te doy un tiempo de soporte inicial para cualquier duda o ajuste pequeño. También te enseño lo básico para que puedas manejar tu página si quieres, dándote el control total. Si necesitas un acompañamiento más continuo a largo plazo, puedo conversar sobre planes de mantenimiento y crecimiento adaptados a tus necesidades. ¡Mi objetivo es que te sientas seguro y con las herramientas para seguir avanzando!
+                    </div>
+                </div>
+                <div>
+                    <button class="faq-question w-full text-left text-lg font-semibold text-brand-dark p-4 bg-white rounded-md shadow hover:bg-gray-50 focus:outline-none transition flex justify-between items-center">
+                        ¿Cuánto tiempo me toma crear una página web o landing page?
+                        <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-answer p-4 bg-white border-t border-gray-200 text-brand-muted">
+                        El tiempo de creación varía según la complejidad del proyecto. Para landing pages o sitios web sencillos, puedo tenerlos listos en tan solo 1 a 2 semanas. Proyectos más complejos con múltiples secciones o funcionalidades específicas pueden tomar entre 3 y 6 semanas. Siempre te daré una estimación clara al inicio del proyecto.
+                    </div>
+                </div>
+                <div>
+                    <button class="faq-question w-full text-left text-lg font-semibold text-brand-dark p-4 bg-white rounded-md shadow hover:bg-gray-50 focus:outline-none transition flex justify-between items-center">
+                        ¿Necesito tener conocimientos técnicos para manejar mi web?
+                        <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="faq-answer p-4 bg-white border-t border-gray-200 text-brand-muted">
+                        ¡Absolutamente no! Mi servicio incluye que te entregue una web totalmente funcional y que sea muy fácil de manejar para ti. Te guiaré y te daré las herramientas para que puedas actualizar tu contenido básico (textos, imágenes) sin necesidad de códigos o de ser un experto.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="section-padding bg-brand-secondary rounded-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-dark">¡Hablemos! <span class="text-brand-primary">Contáctame para tu Estrategia Digital</span></h2>
+            <p class="text-lg text-brand-muted text-center mb-8 max-w-2xl mx-auto">
+                ¿Listo para llevar tu negocio al siguiente nivel con una estrategia digital inteligente? Completa el formulario a continuación y me pondré en contacto contigo para discutir tus objetivos y cómo puedo ayudarte a alcanzarlos.
+            </p>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfJBKGmX-vJ7V-hcOs7W_civH3ZmNne3ln6wABvFJROGJWXHw/viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+            </div>
+        </section>
+
+    </div> <footer class="bg-brand-dark text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-4">¡Trabajemos juntos para que tu negocio crezca en el mundo digital!</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://api.whatsapp.com/send/?phone=%2B573247223160&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors duration-200">
+                    <i class="fab fa-whatsapp fa-2x"></i>
+                </a>
+                <a href="mailto:jesusrivasjb@gmail.com" class="text-white hover:text-brand-primary transition-colors duration-200">
+                    <i class="fas fa-envelope fa-2x"></i>
+                </a>
+                 <a href="https://www.linkedin.com/in/TUUSUARIODELINKEDIN" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors duration-200">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+            </div>
+            <p class="text-sm text-gray-400">&copy; 2025 Jacobo Betancourt. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                if (mobileMenu.classList.contains('flex')) {
+                    mobileMenu.classList.remove('flex');
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+
+                // Close all other active answers
+                document.querySelectorAll('.faq-answer.active').forEach(activeAnswer => {
+                    if (activeAnswer !== answer) {
+                        activeAnswer.classList.remove('active');
+                        activeAnswer.previousElementSibling.classList.remove('active');
+                    }
+                });
+
+                // Toggle current answer
+                answer.classList.toggle('active');
+                button.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
