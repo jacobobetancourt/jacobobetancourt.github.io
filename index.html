@@ -31,6 +31,38 @@
 
     <meta name="google-site-verification" content="zYZzUQFG84s7X0EbpXpQBYxF4QHAfiPD0kAX3XiTK0M" />
 
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeN60UAAAAAOMwPeFoJgImKo3S6WgRgZczpgh"></script>
+    <script>
+        // Función para ejecutar reCAPTCHA y enviar el formulario
+        function onSubmit(token) {
+            document.getElementById("contact-form").submit();
+        }
+
+        // Integración de reCAPTCHA con el formulario de contacto
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Evita el envío por defecto del formulario
+
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('6LeN60UAAAAAOMwPeFoJgImKo3S6WgRgZczpgh', {action: 'submit_form'}).then(function(token) {
+                            // Añade el token de reCAPTCHA a un campo oculto en el formulario
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'g-recaptcha-response';
+                            input.value = token;
+                            contactForm.appendChild(input);
+
+                            // Ahora envía el formulario
+                            contactForm.submit();
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -498,7 +530,7 @@
             </p>
             <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-xl">
                 <h3 class="text-2xl font-semibold text-center mb-6 text-brand-dark">Envíanos un Mensaje</h3>
-                <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-4">
+                <form name="contact" method="POST" data-netlify="true" action="/success.html" id="contact-form" class="space-y-4">
                     <div>
                         <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
                         <input type="text" id="nombre" name="nombre" required
